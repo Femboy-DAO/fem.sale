@@ -1,0 +1,102 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_fem",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_devAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_devTokenBips",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint32",
+        "name": "_saleStartTime",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint32",
+        "name": "_saleDuration",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint32",
+        "name": "_timeToSpend",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_minimumEthRaised",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "activateGoverness",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fem",
+    "outputs": [
+      {
+        "internalType": "contract IVotes",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "femErecter",
+    "outputs": [
+      {
+        "internalType": "contract FemErecter",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "governess",
+    "outputs": [
+      {
+        "internalType": "contract Governess",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "timelockController",
+    "outputs": [
+      {
+        "internalType": "contract TimelockController",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

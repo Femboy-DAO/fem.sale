@@ -1,0 +1,15 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "enum IFemErecter.SaleState",
+				"name": "_state",
+				"type": "uint8"
+			}
+		],
+		"name": "setState",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
