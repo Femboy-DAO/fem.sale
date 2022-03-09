@@ -18,15 +18,16 @@ export const Deposit = () => {
     if (currentTime < saleEndTime) return [false, '']
     return [true, 'Sale has ended.']
   }, [saleEndTime, saleStartTime, ethBalance, value, currentTime, loading])
-  return <div>
-    <h3>Deposit</h3>
-    Deposit ETH to mint new FEM at a rate of 1:1.
-    <br/>
-    <label><b>ETH Amount</b></label> {'  '}
-    <input value={value} disabled={disabled} onChange={(e) => setValue(+e.target.value)} />
-    <button onClick={() => send(parseEther(value.toString()))} disabled={disabled || value <= 0}>
-      Deposit
-    </button>
-    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+  return <div className='container-content'>
+    <h1>Deposit</h1>
+    <p>Deposit ETH to mint new FEM at a rate of 1:1.</p>
+    <div>
+      <label><span>ETH Amount</span></label> {'  '}
+      <input className='input-deposit' value={value} disabled={disabled} onChange={(e) => setValue(+e.target.value)} />
+      <button className='button-deposit' onClick={() => send(parseEther(value.toString()))} disabled={disabled || value <= 0}>
+        Deposit
+      </button>
+    </div>
+    {errorMessage && <p className='error-message'>{errorMessage}</p>}
   </div>
 }

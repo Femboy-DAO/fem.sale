@@ -14,13 +14,12 @@ export const Account = () => {
   if (!accountData) return <div>No account connected</div>
 
   return (
-    <div>
-      <h3>User Info</h3>
-
-      <button onClick={disconnect}>
+    <div className='container-account-data'>
+      <button className='button-disconnect' onClick={disconnect}>
         Disconnect from {accountData?.connector?.name}
       </button>
-      <br />
+
+      <h3>User Info</h3>
 
 {/*       <div>
         {accountData?.ens?.name ?? accountData?.address}
@@ -29,10 +28,10 @@ export const Account = () => {
 
       {
         accountData && (
-          <div>
-            <b>ETH Balance:</b> {ethBalance.formatted} <br/>
-            <b>ETH Deposited:</b> {ethDeposited.formatted} <br/>
-            <b>FEM Balance:</b> {femBalance.formatted} <br/>
+          <div className='account-data-funds'>
+            <span className='account-data'><b>ETH Balance:</b> {ethBalance.formatted}</span>
+            <span className='account-data'><b>ETH Deposited:</b> {ethDeposited.formatted}</span>
+            <span className='account-data'><b>FEM Balance:</b> {femBalance.formatted}</span>
           </div>
         )
       }

@@ -51,13 +51,13 @@ export const SaleStatus = () => {
   </>
 
   return (
-    <div>
-      <h3>Sale Info</h3>
-      <b>Start:</b> <StartsAt /> <br/>
-      <b>End:</b> <EndsAt /> <br/>
-      <b>Spend Deadline:</b> <DeadlineAt /> <br/>
-      <b>ETH Raised:</b> <EthRaised /> <br/>
-      <b>Status:</b> {StatusMessages[saleState ?? "PENDING"]}
+    <div className='container-content'>
+      <h1>Sale Info</h1>
+      <p><b>Start:</b> <StartsAt /></p>
+      <p><b>End:</b> <EndsAt /></p>
+      <p><b>Spend Deadline:</b> <DeadlineAt /></p>
+      <p><b>ETH Raised:</b> <EthRaised /></p>
+      <p><b>Status:</b> {StatusMessages[saleState ?? "PENDING"]}</p>
     </div>
   )
 }

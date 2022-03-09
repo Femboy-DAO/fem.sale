@@ -1,10 +1,46 @@
+* {
+  font-family: 'Hubballi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 22px;
+}
+
+h3,
+span,
+p {
+  color: #d04d65;
+}
+
+html {
+  background-color: #fff;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FFE4FB;
+  padding: 50px;
+  margin: 30px;
+  border-radius: 10px;
+  height: calc(100vh - 160px);
+}
+
+/* Astolfo illustration */
+
+body::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  width: 30vw;
+  height: 30vw;
+  background-image: url('../public/astolfo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 code {
@@ -12,7 +48,119 @@ code {
     monospace;
 }
 
+/* Nav (the GOAT) */
+
 .navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  padding: 20px;
+  border-radius: 11px;
+}
+
+/* Buttons */
+
+button {
+  height: 41px;
+  font-size: 20px;
+  margin-left: 10px;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #D04D65;
+  color: #ffe4fb;
+  box-shadow: 0 2px 11px 0 transparent;
+  cursor: pointer;
+  transition: box-shadow .2s ease;
+}
+
+button:hover {
+  box-shadow: 0 2px 12px 0 #ca35519b;
+}
+
+.button-deposit {
+  background-color: #ffe4fb;
+  color: #d04d65;
   width: 100%;
-  background-color: aquamarine;
+  margin: 0;
+  height: 55px;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.button-deposit:hover {
+  box-shadow: 0 6px 32px 0 #a4384dc2;
+}
+
+/* Inputs */
+
+.input-deposit {
+  height: 51px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 8px;
+  margin-left: 15px;
+  background-color: #d04d65;
+  background-color: #ffe4fb;
+  width: calc(100% - 165px);
+  font-size: 20px;
+}
+
+/* Deposit */
+
+.container-content {
+  position: relative;
+  padding: 35px;
+  background-color: #d04d65;
+  border-radius: 20px;
+  width: 430px;
+}
+
+.container-content h1,
+.container-content p,
+.container-content span {
+  color: #FFE4FB;
+}
+
+.container-content h1 {
+  font-size: 38px;
+  margin: 0 0 15px 0;
+}
+
+p.error-message {
+  position: absolute;
+  bottom: -70px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #d04d65;
+}
+
+/* Account data */
+
+.button-disconnect {
+  margin: 0;
+}
+
+.container-account-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.container-account-data h3 {
+  margin: 15px 0 10px 0;
+}
+
+.account-data {
+  display: block;
+  color: #d04d65;
 }
