@@ -105,10 +105,12 @@ button:hover {
   border: none;
   border-radius: 8px;
   margin-left: 15px;
+  color: #d04d65;
+  font-size: 25px;
+  font-weight: 600;
   background-color: #d04d65;
   background-color: #ffe4fb;
   width: calc(100% - 165px);
-  font-size: 20px;
 }
 
 /* Deposit */
@@ -119,6 +121,7 @@ button:hover {
   background-color: #d04d65;
   border-radius: 20px;
   width: 430px;
+  margin-top: -70px;
 }
 
 .container-content h1,
@@ -135,10 +138,16 @@ button:hover {
 p.error-message {
   position: absolute;
   bottom: -70px;
+  right: 0;
   left: 0;
-  width: 100%;
   text-align: center;
   color: #d04d65;
+  background-color: #fff;
+  line-height: 50px;
+  border-radius: 10px;
+  padding: 0 20px;
+  margin: 0 auto;
+  z-index: 1;
 }
 
 /* Account data */
@@ -163,4 +172,65 @@ p.error-message {
 .account-data {
   display: block;
   color: #d04d65;
+}
+
+/* Media query */
+
+@media (max-width: 950px) {
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    align-items: flex-end;
+    padding: 20px;
+    margin: 20px;
+    height: calc(100vh - 80px);
+  }
+
+  body::after {
+    top: -20px;
+    right: 0;
+    bottom: unset;
+    left: unset;
+    width: 50vw;
+    height: 50vw;
+    max-height: 370px;
+    transform: rotate(180deg);
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+
+  button {
+    margin: 20px 20px 0 0;
+  }
+
+  .container-content {
+    border-radius: 10px;
+    width: calc(100% - 70px);
+    margin-bottom: 20px;
+  }
+
+  .navbar {
+    position: unset;
+    padding: 0;
+    border-top: 1px solid rgba(208, 77, 101, .4);
+    border-radius: 0;
+  }
+
+  .container-account-data {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  p.error-message {
+    position: unset;
+    width: calc(100% - 40px);
+    margin-top: 20px;
+    opacity: 1;
+  }
 }
