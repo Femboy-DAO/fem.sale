@@ -29,9 +29,9 @@ export const Account = () => {
       {
         accountData && (
           <div className='account-data-funds'>
-            <span className='account-data'><b>ETH Balance:</b> {ethBalance.formatted}</span>
-            <span className='account-data'><b>ETH Deposited:</b> {ethDeposited.formatted}</span>
-            <span className='account-data'><b>FEM Balance:</b> {femBalance.formatted}</span>
+            <span className='account-data'><b><span className='token'>ETH</span> Balance:</b> {ethBalance.formatted}</span>
+            <span className='account-data'><b><span className='token'>ETH</span> Deposited:</b> {ethDeposited.formatted}</span>
+            <span className='account-data'><b><span className='token'>FEM</span> Balance:</b> {femBalance.formatted}</span>
           </div>
         )
       }

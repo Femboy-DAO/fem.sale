@@ -11,6 +11,14 @@ p {
   color: #d04d65;
 }
 
+.token {
+  padding: 2px 5px;
+  background-color: #D04D65;
+  border-radius: 5px;
+  font-size: 19px;
+  color: #fff;
+}
+
 html {
   background-color: #fff;
 }
@@ -53,13 +61,12 @@ code {
 .navbar {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   position: fixed;
   top: 40px;
-  left: 40px;
   right: 40px;
   padding: 20px;
   border-radius: 11px;
+  flex-direction: column;
 }
 
 /* Buttons */
@@ -67,23 +74,27 @@ code {
 button {
   height: 41px;
   font-size: 20px;
-  margin-left: 10px;
+  margin-bottom: 10px;
   padding: 5px 15px;
-  border: none;
+  border: 1px solid #D04D65;
   border-radius: 8px;
-  background-color: #D04D65;
-  color: #ffe4fb;
+  background-color: transparent;
+  color: #D04D65;
   box-shadow: 0 2px 11px 0 transparent;
   cursor: pointer;
-  transition: box-shadow .2s ease;
+  transition: box-shadow .5s ease;
+}
+
+button:last-of-type {
+  margin-bottom: 0;
 }
 
 button:hover {
-  box-shadow: 0 2px 12px 0 #ca35519b;
+  box-shadow: 0 2px 12px 0 #ca355047;
 }
 
 .button-deposit {
-  background-color: #ffe4fb;
+  background: linear-gradient(90deg, #ffe4fb 0%, rgb(255, 186, 225) 100%);
   color: #d04d65;
   width: 100%;
   margin: 0;
@@ -95,6 +106,44 @@ button:hover {
 
 .button-deposit:hover {
   box-shadow: 0 6px 32px 0 #a4384dc2;
+}
+
+.toggle-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-right: 9px;
+  margin: 0;
+  background-color: #fff;
+}
+
+.toggle-menu svg {
+  filter: invert(37%) sepia(24%) saturate(2585%) hue-rotate(309deg) brightness(98%) contrast(80%);
+  transition: transform .2s ease;
+}
+
+.menu-open .toggle-menu svg {
+  transform: rotate(180deg);
+}
+
+.container-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  transform: translateY(-20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .2s ease, opacity .5s ease;
+}
+
+.menu-open .container-buttons {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* Inputs */
@@ -128,6 +177,10 @@ button:hover {
 .container-content p,
 .container-content span {
   color: #FFE4FB;
+}
+
+.container-content p:last-of-type {
+  margin-bottom: 0;
 }
 
 .container-content h1 {
@@ -166,12 +219,29 @@ p.error-message {
 }
 
 .container-account-data h3 {
-  margin: 15px 0 10px 0;
+  margin: 20px 0 10px 0;
+  padding-top: 15px;
+  border-top: 1px solid #ffe4fb;
 }
 
 .account-data {
   display: block;
   color: #d04d65;
+  margin-bottom: 7px;
+}
+
+.account-data:last-of-type {
+  margin: 0;
+}
+
+/* Container wallets buttons */
+.container-wallets {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-wallets button {
+  margin: 0 0 10px 0;
 }
 
 /* Media query */
