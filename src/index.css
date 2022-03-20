@@ -5,20 +5,6 @@
   font-size: 22px;
 }
 
-h3,
-span,
-p {
-  color: #d04d65;
-}
-
-.token {
-  padding: 2px 5px;
-  background-color: #D04D65;
-  border-radius: 5px;
-  font-size: 19px;
-  color: #fff;
-}
-
 html {
   background-color: #fff;
 }
@@ -35,6 +21,26 @@ body {
   margin: 30px;
   border-radius: 10px;
   height: calc(100vh - 160px);
+}
+
+
+h3,
+span,
+p {
+  color: #d04d65;
+}
+
+.token {
+  padding: 2px 5px;
+  background-color: #D04D65;
+  border-radius: 5px;
+  font-size: 19px;
+  color: #fff;
+}
+
+.container-content .token {
+  background-color: #FFE4FB;
+  color: #d04d65!important;
 }
 
 /* Astolfo illustration */
@@ -108,7 +114,9 @@ button:hover {
   box-shadow: 0 6px 32px 0 #a4384dc2;
 }
 
-.toggle-menu {
+.toggle-menu,
+.toggle-details {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -116,9 +124,11 @@ button:hover {
   padding-right: 9px;
   margin: 0;
   background-color: #fff;
+  z-index: 5;
 }
 
-.toggle-menu svg {
+.toggle-menu svg,
+.toggle-details svg {
   filter: invert(37%) sepia(24%) saturate(2585%) hue-rotate(309deg) brightness(98%) contrast(80%);
   transition: transform .2s ease;
 }
@@ -144,6 +154,7 @@ button:hover {
   transform: translateY(0);
   opacity: 1;
   pointer-events: all;
+  box-shadow: 0 2px 12px 0 #ca355047;
 }
 
 /* Inputs */
@@ -153,13 +164,19 @@ button:hover {
   padding: 0 15px;
   border: none;
   border-radius: 8px;
-  margin-left: 15px;
+  margin: 15px 0 0 0;
   color: #d04d65;
   font-size: 25px;
   font-weight: 600;
   background-color: #d04d65;
   background-color: #ffe4fb;
-  width: calc(100% - 165px);
+  width: calc(100% - 30px);
+  transition: outline .15s ease;
+}
+
+.input-deposit:focus,
+.input-deposit:active {
+  outline: 2px solid #fff;
 }
 
 /* Deposit */
@@ -244,57 +261,63 @@ p.error-message {
   margin: 0 0 10px 0;
 }
 
+.toggle-details {
+  display: none;
+}
+
 /* Media query */
 
 @media (max-width: 950px) {
   html {
     overflow-x: hidden;
+    background-color: #FFE4FB;
   }
 
   body {
     align-items: flex-end;
+    height: unset;
     padding: 20px;
-    margin: 20px;
-    height: calc(100vh - 80px);
+    margin: 0;
+    border-radius: 0;
   }
 
   body::after {
-    top: -20px;
-    right: 0;
-    bottom: unset;
-    left: unset;
-    width: 50vw;
-    height: 50vw;
-    max-height: 370px;
-    transform: rotate(180deg);
+    position: fixed;
+    left: 20px;
   }
 
   #root {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
-
   button {
+    height: 48px;
     margin: 20px 20px 0 0;
   }
 
   .container-content {
     border-radius: 10px;
-    width: calc(100% - 70px);
-    margin-bottom: 20px;
+    width: calc(100% - 50px);
+    margin: 20px 0 0 0;
+    padding: 25px;
+  }
+
+  .container-deposit {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 228, 251, .5);
+  }
+
+  .input-deposit {
+    margin: 15px 0 0 0;
+    width: calc(100% - 30px);
   }
 
   .navbar {
     position: unset;
     padding: 0;
-    border-top: 1px solid rgba(208, 77, 101, .4);
     border-radius: 0;
-  }
-
-  .container-account-data {
-    width: 100%;
-    margin-top: 20px;
   }
 
   p.error-message {
@@ -302,5 +325,93 @@ p.error-message {
     width: calc(100% - 40px);
     margin-top: 20px;
     opacity: 1;
+  }
+
+  .toggle-menu,
+  .toggle-details {
+    justify-content: center;
+  }
+
+  .toggle-menu svg,
+  .toggle-details svg {
+    margin-left: 10px;
+  }
+
+  .container-account-data {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .container-account-data h3 {
+    padding-top: 0;
+    border-top: none;
+    margin: 0 0 15px 0;
+  }
+
+  .toggle-details {
+    display: flex;
+  }
+
+  .account-data-mobile {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .2s ease, opacity .5s ease;
+  }
+
+  .container-buttons,
+  .account-data-mobile {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    right: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #D04D65;
+    border-radius: 10px;
+    transform: translateY(-20px);
+    z-index: 4;
+  }
+
+  .account-data-mobile {
+    top: 135px;
+  }
+
+  .details-open .account-data-mobile {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+    box-shadow: 0 2px 12px 0 #ca355047;
+  }
+
+  .menu-on .container-buttons {
+    transform: translateY(0);
+  }
+
+  .container-buttons button {
+    margin: 0 0 10px 0;
+  }
+
+  .container-buttons button:last-of-type {
+    margin: 0;
+  }
+
+  .button-disconnect,
+  .toggle-details {
+    margin: 0 0 15px 0;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    z-index: 5;
+  }
+
+  .toggle-details {
+    margin: 0;
   }
 }

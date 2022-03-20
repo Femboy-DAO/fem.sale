@@ -56,7 +56,7 @@ export const SaleStatus = () => {
       <p><b>Start:</b> <StartsAt /></p>
       <p><b>End:</b> <EndsAt /></p>
       <p><b>Spend Deadline:</b> <DeadlineAt /></p>
-      <p><b>ETH Raised:</b> <EthRaised /></p>
+      <p><b><span className='token'>ETH</span> Raised:</b> <EthRaised /></p>
       <p><b>Status:</b> {StatusMessages[saleState ?? "PENDING"]}</p>
     </div>
   )

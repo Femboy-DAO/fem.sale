@@ -20,9 +20,9 @@ export const Deposit = () => {
   }, [saleEndTime, saleStartTime, ethBalance, value, currentTime, loading])
   return <div className='container-content'>
     <h1>Deposit</h1>
-    <p>Deposit ETH to mint new FEM at a rate of 1:1.</p>
-    <div>
-      <label><span>ETH Amount</span></label> {'  '}
+    <p>Deposit <span className="token">ETH</span> to mint new <span className="token">FEM</span> at a rate of 1:1.</p>
+    <div className='container-deposit'>
+      <label><span><span className="token">ETH</span> Amount</span></label> {'  '}
       <input className='input-deposit' value={value} disabled={disabled} onChange={(e) => setValue(+e.target.value)} />
       <button className='button-deposit' onClick={() => send(parseEther(value.toString()))} disabled={disabled || value <= 0}>
         Deposit
