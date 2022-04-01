@@ -23,6 +23,9 @@ body {
   height: calc(100vh - 160px);
 }
 
+#root {
+  max-width: 500px;
+}
 
 h3,
 span,
@@ -243,8 +246,12 @@ p.error-message {
 
 .account-data {
   display: block;
-  color: #d04d65;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 26px;
+  text-overflow: ellipsis;
   margin-bottom: 7px;
+  color: #d04d65;
 }
 
 .account-data:last-of-type {
@@ -289,6 +296,7 @@ p.error-message {
   #root {
     display: flex;
     flex-direction: column;
+    max-width: unset;
   }
 
   button {
