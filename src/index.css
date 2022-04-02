@@ -47,9 +47,15 @@ p {
 }
 
 #countdown {
-  color: #FFE4FB;
-  font-size: 45px;
+  color: #D04D65;
+  font-size: 40px;
   margin: 0;
+  background-color: #FFE4FB;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 4px 15px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Astolfo illustration */
