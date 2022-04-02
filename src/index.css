@@ -46,6 +46,12 @@ p {
   color: #d04d65!important;
 }
 
+#countdown {
+  color: #FFE4FB;
+  font-size: 45px;
+  margin: 0;
+}
+
 /* Astolfo illustration */
 
 body::after {
