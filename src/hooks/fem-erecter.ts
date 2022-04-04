@@ -9,7 +9,8 @@ import {
   DEBUG
 } from '../config'
 import { constants } from 'ethers'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
+import { useLastDefined } from './use-last-defined'
 
 
 export const SaleStates = [
@@ -39,36 +40,37 @@ export const useSaleStartTime = () => {
   const [{data}] = useContractRead(
     FemErecterConfig,
     'saleStartTime',
-    { watch: DEBUG }
   )
-  return data ? data.toNumber() : undefined
+  const startTime = useMemo(() => data ? data.toNumber() : undefined, [data]);
+  return useLastDefined(startTime);
 }
 
 export const useSaleEndTime = () => {
   const [{data}] = useContractRead(
     FemErecterConfig,
     'saleEndTime',
-    { watch: DEBUG }
   )
-  return data ? data.toNumber() : undefined
+  const endTime = useMemo(() => data ? data.toNumber() : undefined, [data]);
+  return useLastDefined(endTime)
+  // returnendTimeata.toNumber() : undefined
 }
 
 export const useSaleDuration = () => {
   const [{data}] = useContractRead(
     FemErecterConfig,
     'saleDuration',
-    { watch: DEBUG }
   )
-  return data ? data.toNumber() : undefined
+  const saleDuration = useMemo(() => data ? data.toNumber() : undefined, [data]);
+  return useLastDefined(saleDuration);
 }
 
-export const useSpendDeadline = (): number | undefined => {
+export const useSpendDeadline = () => {
   const [{data}] = useContractRead(
     FemErecterConfig,
     'spendDeadline',
-    { watch: DEBUG }
   )
-  return data ? data.toNumber() : undefined
+  const spendDeadline = useMemo(() => data ? data.toNumber() : undefined, [data]);
+  return useLastDefined(spendDeadline)
 }
 
 export const useSaleState = (): SaleState | undefined => {
@@ -77,15 +79,14 @@ export const useSaleState = (): SaleState | undefined => {
     'state',
     { watch: true }
   )
-  const stateId = data ? +data : undefined
-  return stateId !== undefined ? SaleStates[stateId] : undefined
+  const state = useMemo(() => data ? SaleStates[+data] : undefined, [data])
+  return useLastDefined(state)
 }
 
 export const useMinimumEthRaised = () => {
   const [{data}] = useContractRead(
     FemErecterConfig,
     'minimumEthRaised',
-    { watch: DEBUG }
   )
   const minimumEthRaised = data ? (data as any) as BigNumber : undefined
   return {
@@ -102,10 +103,10 @@ export const useDepositedAmount = () => {
     'depositedAmount',
     { args: address, watch: true },
   )
-  const depositedAmount = data ? (data as any) as BigNumber : undefined
+  const returnValue = useLastDefined(data);
   return {
-    amount: depositedAmount,
-    formatted: depositedAmount ? formatEther(depositedAmount) : undefined
+    amount: returnValue ? BigNumber.from(returnValue) : undefined,
+    formatted: returnValue ? formatEther(returnValue) : "0.0"
   }
 }
 
