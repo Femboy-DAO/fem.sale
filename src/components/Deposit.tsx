@@ -9,9 +9,9 @@ export const Deposit = () => {
   const saleEndTime = useSaleEndTime()
   const currentTime = Math.floor(Date.now() / 1000);
   const { loading, send } = useDeposit()
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = React.useState("0")
   const [disabled, errorMessage] = React.useMemo(() => {
-    if (value > +(ethBalance.formatted || '0')) return [true, 'Insufficient balance.']
+    if ((+value) > +(ethBalance.formatted || '0')) return [true, 'Insufficient balance.']
     if (!saleEndTime || !saleStartTime) return [true, 'Loading...']
     if (loading) return [true, 'Transaction pending...']
     if (currentTime < saleStartTime) return [true, 'Sale has not started yet.']
@@ -23,8 +23,8 @@ export const Deposit = () => {
     <p>Deposit <span className="token">ETH</span> to mint new <span className="token">FEM</span> at a rate of 1:1.</p>
     <div className='container-deposit'>
       <label><span><span className="token">ETH</span> Amount</span></label> {'  '}
-      <input className='input-deposit' value={value} disabled={disabled} onChange={(e) => setValue(+e.target.value)} />
-      <button className='button-deposit' onClick={() => send(parseEther(value.toString()))} disabled={disabled || value <= 0}>
+      <input className='input-deposit' value={value} onChange={(e) => setValue(e.target.value)} />
+      <button className='button-deposit' onClick={() => send(parseEther(value.toString()))} disabled={disabled || (+value) <= 0}>
         Deposit
       </button>
     </div>

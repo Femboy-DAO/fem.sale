@@ -1,8 +1,55 @@
 import * as React from 'react'
 import { useFemErecterConfig, StatusMessages } from '../hooks/fem-erecter';
 
+type CountdownProps = {
+  countDownDate: number;
+  message: string;
+  // secondaryMessage: string;
+}
+
+export const useCurrentTime = () => {
+  const [time, setTime] = React.useState(Math.floor(Date.now() / 1000));
+  React.useEffect(() => {
+    let interval: any = null;
+    interval = setInterval(() => setTime(Math.floor(Date.now() / 1000)), 1000)
+    return () => clearInterval(interval);
+  });
+  return time;
+}
+
+const CountdownTimer = ({countDownDate, message}: CountdownProps) => {
+  const [text, setText] = React.useState("");
+  React.useEffect(() => {
+    let interval: any = null;
+    interval = setInterval(() => {
+      if (!countDownDate) return;
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      if (distance < 0) {
+        clearInterval(interval)
+        setText("");
+        return
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      setText(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [countDownDate]);
+
+  if (!text) return <></>
+
+  return <>
+    <h1>{message}</h1>
+    <h5 className="countdown">{text}</h5>
+  </>
+}
+
 export const SaleStatus = () => {
-  const currentTime = Math.floor(Date.now() / 1000);
+  const currentTime = useCurrentTime()
+
   const {
     saleStartTime,
     saleEndTime,
@@ -12,36 +59,6 @@ export const SaleStatus = () => {
     saleState
   } = useFemErecterConfig();
 
-  const StartsAt = () => <>
-    {
-      saleStartTime ?
-        currentTime < saleStartTime
-          ? `In ${((saleStartTime - currentTime) / 3600).toFixed(2)} Hours`
-          : `Occurred at ${new Date(saleStartTime).toString()}`
-      : ''
-    }
-  </>
-
-  const EndsAt = () => <>
-    {
-      saleEndTime ?
-        currentTime < saleEndTime
-          ? `In ${((saleEndTime - currentTime) / 3600).toFixed(2)} Hours`
-          : `Occurred at ${new Date(saleEndTime).toString()}`
-      : ''
-    }
-  </>
-
-  const DeadlineAt = () => <>
-    {
-      spendDeadline ?
-        currentTime < spendDeadline
-          ? `In ${((spendDeadline - currentTime) / 3600).toFixed(2)} Hours`
-          : `Occurred at ${new Date(spendDeadline).toString()}`
-      : ''
-    }
-  </>
-
   const EthRaised = () => <>
     {
       minimumEthRaised
@@ -50,36 +67,18 @@ export const SaleStatus = () => {
     }
   </>
 
-  var countDownDate = new Date("Apr 8, 2022 00:00:00").getTime();
-  var x = setInterval(function() {
-    var now = new Date().getTime();
-
-    var distance = countDownDate - now;
-
-    let countDownTimer = document.getElementById("countdown")!
-
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countDownTimer.innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
-    if (distance < 0) {
-      clearInterval(x);
-      countDownTimer.innerHTML = "Let the femboy takeover commence.";
-    }
-  }, 1000);
-
   return (
     
     <div className='container-content'>
-      <h1>Coming soon uWu</h1>
-      <h5 id="countdown"></h5>
-      <p><b>Start:</b> <StartsAt /></p>
-      <p><b>End:</b> <EndsAt /></p>
-      <p><b>Spend Deadline:</b> <DeadlineAt /></p>
+      {
+        saleState === "PENDING" && <CountdownTimer countDownDate={saleStartTime * 1000} message="Coming soon uWu" />
+      }
+      {
+        saleState === "ACTIVE" && <CountdownTimer countDownDate={saleEndTime * 1000} message="Ending soon uWu" />
+      }
+      {
+        saleState === "FUNDS_PENDING" && <CountdownTimer countDownDate={spendDeadline * 1000} message="Spending soon? uWu" />
+      }
       <p><b><span className='token'>ETH</span> Raised:</b> <EthRaised /></p>
       <p><b>Status:</b> {StatusMessages[saleState ?? "PENDING"]}</p>
     </div>

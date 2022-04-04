@@ -30,11 +30,6 @@ export const Account = () => {
       <div className='account-data-mobile'>
         <h3>User Info</h3>
 
-  {/*       <div>
-          {accountData?.ens?.name ?? accountData?.address}
-          {accountData?.ens ? ` (${accountData?.address})` : null}
-        </div> */}
-
         {
           accountData && (
             <div className='account-data-funds'>
@@ -44,10 +39,6 @@ export const Account = () => {
             </div>
           )
         }
-
-      {/*  {accountData?.ens?.avatar && (
-          <img src={accountData.ens.avatar} style={{ height: 40, width: 40 }} />
-        )} */}
       </div>
     </div>
   )
