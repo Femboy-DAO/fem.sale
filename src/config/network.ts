@@ -13,7 +13,7 @@ const ALCHEMY_ID = process.env.REACT_APP_ALCHEMY_ID as string
 const ETHERSCAN_API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY as string
 const INFURA_ID = process.env.REACT_APP_INFURA_ID as string
 // Can't import ChainName, use keyof instead
-export const DEFAULT_NETWORK = (process.env.REACT_APP_NETWORK || 'polygonMainnet') as keyof typeof chain
+export const DEFAULT_NETWORK = (process.env.REACT_APP_NETWORK || 'mainnet') as keyof typeof chain
 
 // Pick chains
 const chains = allChains
@@ -29,6 +29,12 @@ const networkOverrides: Record<number, NetworkOverride> = {
     chainId: 137,
     _defaultProvider: (providers) => new JsonRpcProvider(`https://polygon-mainnet.g.alchemy.com/v2/${ALCHEMY_ID}`),
     webSocketProvider: () => new WebSocketProvider(`wss://polygon-mainnet.g.alchemy.com/v2/${ALCHEMY_ID}`, 137)
+  },
+  1: {
+    name: 'mainnet',
+    chainId: 1,
+    _defaultProvider: (providers) => new JsonRpcProvider(`https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_ID}`),
+    webSocketProvider: () => new WebSocketProvider(`wss://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_ID}`, 1)
   }
 }
 
