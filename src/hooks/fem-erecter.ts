@@ -79,7 +79,7 @@ export const useSaleState = (): SaleState | undefined => {
     'state',
     { watch: true }
   )
-  const state = useMemo(() => data ? SaleStates[+data] : undefined, [data])
+  const state = useMemo(() => data !== undefined ? SaleStates[+data] : undefined, [data])
   return useLastDefined(state)
 }
 
