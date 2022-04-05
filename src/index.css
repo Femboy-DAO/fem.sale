@@ -48,7 +48,7 @@ p {
 
 .countdown {
   color: #D04D65;
-  font-size: 40px;
+  font-size: 23px;
   margin: 0;
   background-color: #FFE4FB;
   border-radius: 10px;
@@ -248,6 +248,7 @@ p.error-message {
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
+  max-width: 310px;
 }
 
 .container-account-data h3 {
@@ -282,6 +283,29 @@ p.error-message {
 
 .toggle-details {
   display: none;
+}
+
+/* Status */
+
+.container-status {
+  position: fixed;
+  top: 60px;
+  left: 60px;
+  margin: 0;
+  padding: 20px;
+  width: unset;
+  border-radius: 10px;
+  background: white;
+  width: 310px;
+}
+
+.container-status h1,
+.container-status p {
+  color: #d04d65;
+}
+
+.container-status h1 {
+  font-size: 23px;
 }
 
 /* Media query */
@@ -358,6 +382,7 @@ p.error-message {
   }
 
   .container-account-data {
+    max-width: unset;
     background-color: transparent;
     padding: 0;
   }
@@ -433,5 +458,13 @@ p.error-message {
 
   .toggle-details {
     margin: 0;
+  }
+
+  /* Status */
+
+  .container-status {
+    position: unset;
+    top: unset;
+    left: unset;
   }
 }

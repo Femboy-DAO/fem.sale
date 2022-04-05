@@ -69,7 +69,7 @@ export const SaleStatus = () => {
 
   return (
     
-    <div className='container-content'>
+    <div className='container-content container-status'>
       {
         saleState === "PENDING" && <CountdownTimer countDownDate={saleStartTime * 1000} message="Coming soon uWu" />
       }
