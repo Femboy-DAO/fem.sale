@@ -20,7 +20,7 @@ body {
   padding: 50px;
   margin: 30px;
   border-radius: 10px;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 190px);
 }
 
 .footer-container {
@@ -99,8 +99,8 @@ body::after {
   position: absolute;
   bottom: 0;
   left: 50px;
-  width: 30vw;
-  height: 30vw;
+  width: 20vw;
+  height: 20vw;
   background-image: url('../public/astolfo.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -500,5 +500,23 @@ p.error-message {
     position: unset;
     top: unset;
     left: unset;
+  }
+
+  /* Footer */
+
+  .footer-container {
+    align-items: center;
+    justify-content: center;
+    position: unset;
+    width: 100%;
+    background-color: white;
+    margin-top: 25px;
+    border-radius: 8px;
+    height: 60px;
+  }
+
+  .footer-container a {
+    height: 30px;
+    width: 30px;
   }
 }
