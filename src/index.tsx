@@ -4,6 +4,7 @@ import { Provider } from 'wagmi'
 import { connectors, provider, webSocketProvider } from './config'
 import App from './App'
 import "./index.css";
+import "./slides.css";
 
 
 ReactDOM.render(

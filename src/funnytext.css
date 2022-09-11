@@ -1,0 +1,20 @@
+.wavy {
+    animation-name: wavy;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  @keyframes wavy {
+    0% {
+      top: 0.15em;
+    }
+    50% {
+      top: -0.15em;
+    }
+    100% {
+      top: 0.15em;
+    }
+  }

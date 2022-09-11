@@ -6,8 +6,8 @@ import Discord from "../images/discord.png";
 
 const LinkExt = ({ href, children }: { href: string; children: ReactNode; }) =>
   <a rel="noopener noreferrer" target="_blank" href={href}>
-  {children}
-</a>
+    {children}
+  </a>
 /* {{
   backgroundColor: "#F8F8F8",
   borderTop: "1px solid #E7E7E7",
@@ -21,14 +21,14 @@ const LinkExt = ({ href, children }: { href: string; children: ReactNode; }) =>
 }} */
 
 export const Footer = () => {
-  return <div className="footer-container">
+  return <div><div className="big-container transparent"></div><div className="flat-container footer-container">
     <div className="footer">
 
-    <LinkExt href={TWITTER_URL}><img className="fa" src={Twitter} alt="Twitter logo" /></LinkExt>
+      <LinkExt href={TWITTER_URL}><img className="fa" src={Twitter} alt="Twitter logo" /></LinkExt>
 
-<LinkExt href={DISCORD_URL}><img className="fa" src={Discord} alt="Discord logo" /></LinkExt>
+      <LinkExt href={DISCORD_URL}><img className="fa" src={Discord} alt="Discord logo" /></LinkExt>
 
-<LinkExt href={GITHUB_URL}><img className="fa" src={Github} alt="Github logo" /></LinkExt>
+      <LinkExt href={GITHUB_URL}><img className="fa" src={Github} alt="Github logo" /></LinkExt>
     </div>
-</div>
+  </div></div>
 }
