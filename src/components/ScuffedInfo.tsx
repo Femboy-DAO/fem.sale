@@ -4,9 +4,9 @@ export const ScuffedInfo = () => {
 
   return <div>
     <div className="gen-container center-insides lightly-padded center-text">
-      <h2>
+      <h3>
         Mint soon!!! OwO
-      </h2>
+      </h3>
     </div>
   </div>
 }
