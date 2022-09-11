@@ -20,6 +20,11 @@ const GovernessActivatorAddresses: Record<string, string> = {
   mainnet: '0x6723659425DfdF94caf6345fA269855066FB57f0'
 }
 
+const ScuffedFemboysAddresses: Record<string, string> = {
+  polygonMainnet: '0xFf994Ed48952BC9221bEe1e278c1bCA39443CC7C',
+  mainnet: '0x6723659425DfdF94caf6345fA269855066FB57f0'
+}
+
 const TimelockControllerAddresses: Record<string, string> = {
   polygonMainnet: '0xd61393A01B1327047dde3027DcEa0B33599d81Dd',
   mainnet: '0xf78A448E464a1fEB693D76c9211D2d03ae488206'
@@ -34,5 +39,6 @@ export const Fem = FemAddresses[DEFAULT_NETWORK]
 export const FemErecter = FemErecterAddresses[DEFAULT_NETWORK]
 export const Governess = GovernessAddresses[DEFAULT_NETWORK]
 export const GovernessActivator = GovernessActivatorAddresses[DEFAULT_NETWORK]
+export const ScuffedFemboys = ScuffedFemboysAddresses[DEFAULT_NETWORK]
 export const TimelockController = TimelockControllerAddresses[DEFAULT_NETWORK]
 export const Debug = DebugAddresses[DEFAULT_NETWORK]
