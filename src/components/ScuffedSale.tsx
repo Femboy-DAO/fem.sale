@@ -44,7 +44,7 @@ export const ScuffedSale = () => {
     if (!mintStatus || !maxScuffies4Claim || scuffiesClaimed == null) return [true, 'Loading...']
     if (!userAddress.address) return [true, 'Please connect wallet']
     if (claimCb.loading) return [true, 'Transaction pending...']
-    
+
     if (!mintStatus) return [true, "Mint has not started yet!"]
     if (scuffiesClaimed + claimCount > maxScuffies4Claim) return [true, "They've all been claimed and something has gone terribly wrong"]
     // not on the list (not on list, store the list somewhere) -Later
@@ -72,35 +72,43 @@ export const ScuffedSale = () => {
     return parsedNum;
   }
 
-  return <div className="gen-container center-insides ">
+  return <div className="gen-container center-insides padded">
     <div className="gen-container padded center-insides bubbly alt-color-2 squish">
       <div>
-        <div>
+        <div className="gen-container lightly-padded">
+          <div>
+
           <h2>Claim</h2>
           <p>If you're on the claim list, you can claim 2 Scuffed Femboys for free!</p>
           <p><span>Status: </span>{/* Please connect wallet / You're on the list! / You're not on the list :( / You already claimed! */}
             <span>{errorMessageClaim}</span>
           </p>
+
+          </div>
+
         </div>
 
         <div>
 
           <div className='gen-container center-insides'>
-            <button className='gen-button' style={{ width: '100%' }}  disabled={disabledClaim}>
+            <button className='gen-button' style={{ width: '100%' }} disabled={disabledClaim}>
               Claim!
             </button>
           </div>
 
         </div>
-        
+
 
         <hr />
 
+        <div className="gen-container lightly-padded">
+          <div>
         <div>
           <h2>Mint</h2>
           <p>1 Scuffed Femboy costs 0.05 <span className="token">ETH</span> </p>
         </div>
 
+        </div></div>
         <div>
 
           <div className='gen-container center-insides'>
@@ -113,22 +121,27 @@ export const ScuffedSale = () => {
             </button>
           </div>
 
+          <div className='gen-container center-insides center-text'>
+            {(mintCount >= 20) ? <span>Y-you really don't need so many ;_;</span> : (mintCount >= 10) ? <span>W-why are you minting so many? OwO</span> : (mintCount >= 5) ? <span>You need an entire har-uh, I mean, squad, huh? Understandable ^_^</span> : ""}
+          </div>
+
           <div className='gen-container center-insides'>
-            <div>
             <button className='gen-button' style={{ width: '100%' }} onClick={() => buyCb.send(parseEther(getBuyValue().toString()), mintCount)} disabled={disabledBuy}>
               Mint! {" (" + getBuyValue() + " ETH)"}
             </button>
-            {(mintCount >= 20) ? <span>Y-you really don't need so many ;_;</span> : (mintCount >= 10) ? <span>W-why are you minting so many? OwO</span> : (mintCount >= 5) ? <span>You need an entire har-uh, I mean, squad, huh? Understandable ^_^</span> : ""}
-            </div>
-            
+          </div>
+          
+          
+          <div className='gen-container center-insides center-text'>
+          {errorMessageBuy && <span>{errorMessageBuy}</span>}
           </div>
 
-          {/*<button className='button-deposit' onClick={() => send(parseEther(value.toString()))} disabledBuy={disabledBuy || (+value) <= 0}>
-              Mint
-            </button> */}
 
         </div>
+
+        {/* 
         {errorMessageBuy && <p className='error-message'>{errorMessageBuy}</p>}
+ */}
 
       </div>
     </div>

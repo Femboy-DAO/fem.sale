@@ -1,6 +1,6 @@
 export const DAOLore = () => {
   return <div className="gen-container padded center-insides"><div
-    className="gen-container squish tall">
+    className="gen-container padded squish tall">
     <div>
       <h2>DAO Lore</h2>
       <p>
