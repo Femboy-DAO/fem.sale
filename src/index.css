@@ -119,13 +119,6 @@ body {
   background-position:left bottom;
 }
 
-.banner-splash {
-  /* justify-content: center;
-  background-image: url('../public/splash_graffiti.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position:center; */
-}
 
 @media (orientation: landscape) {
   .splash-image {
@@ -281,7 +274,6 @@ code {
   justify-content: flex-end;
   position: fixed;
   border-radius: 11px;
-  padding:10px;
 
   height: 0px;
   position: sticky;
@@ -290,7 +282,7 @@ code {
 }
 
 .navbar-connect {
-  padding:10px;
+  padding:1.5rem;
 }
 
 /* Buttons */
@@ -441,7 +433,8 @@ p.error-message {
   /* justify-content: flex-end; */
   background-color: #fff;
   border-radius: 10px;
-  padding: 10px;
+  padding: 0.5rem;
+  margin:1.0rem;
   max-width: 310px;
 
   height: fit-content;
@@ -461,6 +454,10 @@ p.error-message {
   text-overflow: ellipsis;
   margin-bottom: 7px;
   color: #d04d65;
+}
+
+.account-data-mobile {
+  padding: 0.5rem 0;
 }
 
 .account-data:last-of-type {
