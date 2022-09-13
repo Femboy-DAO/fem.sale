@@ -23,14 +23,16 @@ export const useMintStatus = () => {
   return useLastDefined(mintStatus);
 }
 
-export const useAlreadyClaimed = (addressContainer:any) => {
-  const address = addressContainer?.address ?? constants.AddressZero;
+export const useAlreadyClaimed = (userAddress:any) => {
+  const address = userAddress.address || constants.AddressZero
+
   const [{data}] = useContractRead(
     ScuffedFemboysConfig,
     'alreadyClaimed',
     { args: address },
   )
-  const alreadyClaimed = useMemo(() => {/* console.log(data); */ return data ? data : undefined}, [data]);
+
+  const alreadyClaimed = useMemo(() => {/* console.log('ALREDAY CLAIMED',data, address); */ return data ? data : undefined}, [data]);
   return useLastDefined(alreadyClaimed);
 }
 
@@ -109,6 +111,7 @@ export const useClaim = () => {
     'claim'
   )
   const send = useCallback((merkleProof: string[]) => {
+    console.log(merkleProof);
     write({ args: [merkleProof] })
   }, [write])
   return {

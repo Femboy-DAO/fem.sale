@@ -3,6 +3,7 @@ import { parseEther } from 'ethers/lib/utils'
 import { useMintStatus, useMaxSupply, useTotalSupply, useBuy, useClaim, useMaxScuffies4Sale, useScuffiesSold, useScuffiesClaimed, useMaxScuffies4Claim, useAlreadyClaimed } from '../hooks/scuffed-femboys'
 import { useEthBalance, useAddress } from '../hooks/user';
 import NP from 'number-precision'
+import claimMerkleProofs from '../claimMerkleProofs.json';
 
 export const ScuffedSale = () => {
 
@@ -26,9 +27,23 @@ export const ScuffedSale = () => {
     return NP.times(mintCount, mintPrice);
   }
 
+  interface addressProofBook {
+    [key: string]: string[];
+  } 
+
+  let claimMerkleProofsAddress : addressProofBook = claimMerkleProofs.address;
+
+  function getMerkleProofsByAddress(addy:string) {
+    return claimMerkleProofsAddress[addy.toLowerCase()];
+  }
+
+  function getMerkleProofsByAddressExist(addy:string) {
+    return claimMerkleProofsAddress.hasOwnProperty(addy.toLowerCase());
+  }
+
   const buyCb = useBuy()
   const [disabledBuy, errorMessageBuy] = React.useMemo(() => {
-    if (buyCb.error) console.log(buyCb.error.toString())
+    //if (buyCb.error) console.log(buyCb.error.toString())
     if (!mintStatus || !maxScuffies4Sale || scuffiesSold == null) return [true, 'Loading...'] // undefined
     if (!userAddress.address) return [true, 'Please connect wallet']
     if (buyCb.loading) return [true, 'Transaction pending...']
@@ -40,20 +55,22 @@ export const ScuffedSale = () => {
 
   const claimCb = useClaim()
   const [disabledClaim, errorMessageClaim] = React.useMemo(() => {
-    if (claimCb.error) console.log(claimCb.error.toString())
+    //if (claimCb.error) console.log(claimCb.error.toString())
     if (!mintStatus || !maxScuffies4Claim || scuffiesClaimed == null) return [true, 'Loading...']
     if (!userAddress.address) return [true, 'Please connect wallet']
     if (claimCb.loading) return [true, 'Transaction pending...']
 
     if (!mintStatus) return [true, "Mint has not started yet!"]
-    if (scuffiesClaimed + claimCount > maxScuffies4Claim) return [true, "They've all been claimed and something has gone terribly wrong"]
-    // not on the list (not on list, store the list somewhere) -Later
-    // Make sure this appears
-    if (alreadyClaimed) return [true, "Already claimed!"]
-    // On the list and haven't claimed -Later
+    if (scuffiesClaimed + claimCount > maxScuffies4Claim) return [true, 'They\'ve all been claimed and something has gone terribly wrong']
+    // not on the list (not on list, store the list somewhere)
+    if (!getMerkleProofsByAddressExist(userAddress.address)) return [true, 'Not on the list :<']
+    // Make sure this appears 
+    //if (alreadyClaimed) return [true, "Already claimed!"]
+    // On the list and haven't claimed
+    if (getMerkleProofsByAddressExist(userAddress.address)) return [false, 'You\'re on the list! :D']
 
     return [true, 'Unknown']
-  }, [mintStatus, scuffiesClaimed, maxScuffies4Claim, ethBalance, claimCb.loading, claimCb.error, totalSupply, maxSupply])
+  }, [mintStatus, scuffiesClaimed, maxScuffies4Claim, ethBalance, userAddress, claimCb.loading, claimCb.error, totalSupply, maxSupply])
 
   function mintCountInputVailidityCheck(val: string) {
     let parsedNum = mintCount;
@@ -91,7 +108,7 @@ export const ScuffedSale = () => {
         <div>
 
           <div className='gen-container center-insides'>
-            <button className='gen-button' style={{ width: '100%' }} disabled={disabledClaim}>
+            <button className='gen-button' style={{ width: '100%' }} onClick={() => claimCb.send(getMerkleProofsByAddress(userAddress.address || ''))} disabled={disabledClaim}>
               Claim!
             </button>
           </div>

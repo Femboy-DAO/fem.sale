@@ -4,7 +4,6 @@ import { Banner, Debug, DAOLore, Deposit, Withdraw, ScuffedCarousel, ScuffedSale
 import { Footer } from './components/Footer';
 import { DEBUG } from './config';
 
-
 function App() {
   return <>
     {/* <SaleStatus />
