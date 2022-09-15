@@ -157,6 +157,15 @@ body {
   margin: 10px;
 }
 
+.gen-button.disabled {
+  cursor: default;
+  box-shadow: none;
+  background: linear-gradient(90deg, #ffe4fb 0%, rgb(255, 186, 225) 100%);
+  color: #d04d65;
+  border: 1px solid #d04d65;
+  opacity: 0.65;
+}
+
 .gen-input {
   margin: 10px;
   height: 55px;
@@ -172,7 +181,7 @@ body {
   transition: outline .15s ease;
 }
 
-.gen-button:hover {
+.gen-button:hover:not(.disabled) {
   box-shadow: 0 6px 32px 0 #a4384dc2;
 }
 

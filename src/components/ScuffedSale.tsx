@@ -108,7 +108,7 @@ export const ScuffedSale = () => {
         <div>
 
           <div className='gen-container center-insides'>
-            <button className='gen-button' style={{ width: '100%' }} onClick={() => claimCb.send(getMerkleProofsByAddress(userAddress.address || ''))} disabled={disabledClaim}>
+            <button className={'gen-button ' + (disabledClaim ? 'disabled' : '')} style={{ width: '100%' }} onClick={() => claimCb.send(getMerkleProofsByAddress(userAddress.address || ''))} disabled={disabledClaim}>
               Claim!
             </button>
           </div>
@@ -143,7 +143,7 @@ export const ScuffedSale = () => {
           </div>
 
           <div className='gen-container center-insides'>
-            <button className='gen-button' style={{ width: '100%' }} onClick={() => buyCb.send(parseEther(getBuyValue().toString()), mintCount)} disabled={disabledBuy}>
+            <button  className={'gen-button ' + (disabledBuy ? 'disabled' : '')} style={{ width: '100%' }} onClick={() => buyCb.send(parseEther(getBuyValue().toString()), mintCount)} disabled={disabledBuy}>
               Mint! {" (" + getBuyValue() + " ETH)"}
             </button>
           </div>
