@@ -65,7 +65,7 @@ export const ScuffedSale = () => {
     // not on the list (not on list, store the list somewhere)
     if (!getMerkleProofsByAddressExist(userAddress.address)) return [true, 'Not on the list :<']
     // Make sure this appears 
-    //if (alreadyClaimed) return [true, "Already claimed!"]
+    if (alreadyClaimed) return [true, "Already claimed!"]
     // On the list and haven't claimed
     if (getMerkleProofsByAddressExist(userAddress.address)) return [false, 'You\'re on the list! :D']
 

@@ -26,11 +26,13 @@ export const useMintStatus = () => {
 export const useAlreadyClaimed = (userAddress:any) => {
   const address = userAddress.address || constants.AddressZero
 
-  const [{data}] = useContractRead(
+  const [{data}, refetch] = useContractRead(
     ScuffedFemboysConfig,
     'alreadyClaimed',
     { args: address },
   )
+
+  useMemo(() => {console.log("refetching"); refetch();}, [address]);
 
   const alreadyClaimed = useMemo(() => {/* console.log('ALREDAY CLAIMED',data, address); */ return data ? data : undefined}, [data]);
   return useLastDefined(alreadyClaimed);
