@@ -11,10 +11,10 @@ export const ScuffedCarousel = () => {
       const slidesContainer = document.getElementById("slides-container");
       const slide = document.querySelector(".slide");
 
-      let slidesCount = document.getElementById("slides-container")?.children.length || 0;
+      let slidesCount = (document.getElementById("slides-container")?.children.length || 0)*1;
       let moveDir = 1;
 
-      const slideWidth = slide?.clientWidth || 0;
+      const slideWidth = ((slide?.clientWidth) || 0)/1;
       const containerWidth = slidesContainer?.clientWidth || 0;
 
       if (slidesContainer) {
