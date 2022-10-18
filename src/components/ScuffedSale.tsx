@@ -19,7 +19,7 @@ export const ScuffedSale = () => {
   const scuffiesClaimed = useScuffiesClaimed();
   const alreadyClaimed = useAlreadyClaimed(userAddress);
 
-  const mintPrice = 0.05;
+  const mintPrice = 0.04;
   const [mintCount, setMintCount] = React.useState(1);
   const claimCount = 2;
 
@@ -49,6 +49,8 @@ export const ScuffedSale = () => {
     if (buyCb.loading) return [true, 'Transaction pending...']
     if ((+getBuyValue()) > +(ethBalance.formatted || '0')) return [true, 'Insufficient balance.']
     if (!mintStatus) return [true, "Mint has not started yet!"]
+    if (scuffiesSold >= maxScuffies4Sale) return [true, "They\'re all gone ;_;"]
+    if (scuffiesSold + mintCount > maxScuffies4Sale) return [true, "You can't buy more than there are left"]
     if (scuffiesSold + mintCount <= maxScuffies4Sale) return [false, ""]
     return [true, 'They\'re all gone ;_;']
   }, [mintStatus, scuffiesSold, maxScuffies4Sale, ethBalance, userAddress, mintCount, buyCb.loading, buyCb.error, totalSupply, maxSupply])
@@ -122,7 +124,7 @@ export const ScuffedSale = () => {
           <div>
         <div>
           <h2>Mint</h2>
-          <p>1 Scuffed Femboy costs 0.05 <span className="token">ETH</span> </p>
+          <p>1 Scuffed Femboy costs 0.04 <span className="token">ETH</span></p>
         </div>
 
         </div></div>

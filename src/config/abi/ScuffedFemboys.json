@@ -25,6 +25,11 @@
         "internalType": "address",
         "name": "saleReceiver_",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenDataProvider_",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -175,19 +180,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "baseURI",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -564,19 +556,6 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "newURI",
-        "type": "string"
-      }
-    ],
-    "name": "setBaseURI",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "bytes32",
         "name": "newClaimRoot",
         "type": "bytes32"
@@ -614,6 +593,19 @@
       }
     ],
     "name": "setMintingStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenDataProvider_",
+        "type": "address"
+      }
+    ],
+    "name": "setTokenDataProvider",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -659,6 +651,32 @@
       }
     ],
     "name": "tokenByIndex",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tokenDataProvider",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tokenIdStartFrom",
     "outputs": [
       {
         "internalType": "uint256",
