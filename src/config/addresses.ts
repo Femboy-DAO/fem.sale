@@ -21,7 +21,7 @@ const GovernessActivatorAddresses: Record<string, string> = {
 }
 
 const ScuffedFemboysAddresses: Record<string, string> = {
-  polygonMainnet: '0x9288a0cCd754E11b80B15C74fA92C701DE353065',
+  polygonMainnet: '0x4d43d56fF8733B20B053CF2F42DF3bc7cB1657Eb',
   mainnet: '0x6A4912083e8e7B6508D0568EB3eB40A8E681E121'
 }
 

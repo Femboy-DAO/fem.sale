@@ -1,135 +1,86 @@
-import { useAccount, useBalance, useContractRead, useContractWrite } from 'wagmi'
-import { formatEther } from 'ethers/lib/utils'
-import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
-import {
-  ScuffedFemboys,
-  ScuffedFemboysAbi
-} from '../config'
-import { constants } from 'ethers'
-import { useCallback, useMemo } from 'react'
-import { useLastDefined } from './use-last-defined'
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
+import { formatEther, Result } from "ethers/lib/utils";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+import { ScuffedFemboys, ScuffedFemboysAbi } from "../config";
+import { constants } from "ethers";
+import { useCallback, useMemo } from "react";
+import { useLastDefined } from "./use-last-defined";
 
 const ScuffedFemboysConfig = {
   addressOrName: ScuffedFemboys,
-  contractInterface: ScuffedFemboysAbi
-}
+  contractInterface: ScuffedFemboysAbi,
+};
 
-export const useMintStatus = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'mintStatus',
-  )
-  const mintStatus = useMemo(() => data ? data : undefined, [data]);
-  return useLastDefined(mintStatus);
-}
+const useLatestCallResult = (name: string, args?: any, toNumber?: boolean, watch?: boolean) => {
+  const [{ data }] = useContractRead(ScuffedFemboysConfig, name, {
+    watch: watch,
+    args,
+  });
+  const lastDef = useLastDefined(data);
+  return toNumber ? lastDef?.toNumber?.() ?? lastDef : lastDef;
+};
 
-export const useAlreadyClaimed = (userAddress:any) => {
-  const address = userAddress.address || constants.AddressZero
+export const useMintStatus = () => useLatestCallResult("mintStatus", null, false, true);
 
-  const [{data}, refetch] = useContractRead(
-    ScuffedFemboysConfig,
-    'alreadyClaimed',
-    { args: address },
-  )
+export const useAlreadyClaimed = () => {
+  const [{ data: account }] = useAccount();
+  const address = account?.address ?? constants.AddressZero;
+  const data = useLatestCallResult("alreadyClaimed", address, false, true);
+  return data;
+};
 
-  useMemo(() => {console.log("refetching"); refetch();}, [address]);
+export const useMaxSupply = () =>
+  useLatestCallResult("maxSupply", undefined, true, false);
 
-  const alreadyClaimed = useMemo(() => {/* console.log('ALREDAY CLAIMED',data, address); */ return data ? data : undefined}, [data]);
-  return useLastDefined(alreadyClaimed);
-}
+export const useTotalSupply = () =>
+  useLatestCallResult("totalSupply", undefined, true, true);
 
-export const useMaxSupply = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'maxSupply',
-  )
-  const maxSupply = useMemo(() => data ? data.toNumber() : undefined, [data]);
-  return useLastDefined(maxSupply);
-}
+export const useMaxScuffies4Sale = () =>
+  useLatestCallResult("maxScuffies4Sale", undefined, true, false);
 
-export const useTotalSupply = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'totalSupply',
-  )
-  const totalSupply = useMemo(() => data ? data.toNumber() : undefined, [data]);
-  return useLastDefined(totalSupply);
-}
+export const useScuffiesSold = () =>
+  useLatestCallResult("scuffiesSold", undefined, true, true);
 
-export const useMaxScuffies4Sale = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'maxScuffies4Sale',
-  )
-  const maxScuffies4Sale = useMemo(() => data ? data.toNumber() : undefined, [data]);
-  return useLastDefined(maxScuffies4Sale);
-}
+export const useMaxScuffies4Claim = () =>
+  useLatestCallResult("maxScuffies4Claim", undefined, true, false);
 
-export const useScuffiesSold = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'scuffiesSold',
-  )
-  const scuffiesSold = useMemo(() => data ? data.toNumber() : undefined, [data]);
-  return useLastDefined(scuffiesSold);
-}
-
-export const useMaxScuffies4Claim = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'maxScuffies4Claim',
-  )
-  const maxScuffies4Claim = useMemo(() => data ? data.toNumber() : undefined, [data]);
-  return useLastDefined(maxScuffies4Claim);
-}
-
-export const useScuffiesClaimed = () => {
-  const [{data}] = useContractRead(
-    ScuffedFemboysConfig,
-    'scuffiesClaimed',
-  )
-  const scuffiesClaimed = useMemo(() => data ? data.toNumber() : undefined, [data]);
-  return useLastDefined(scuffiesClaimed);
-}
+export const useScuffiesClaimed = () =>
+  useLatestCallResult("scuffiesClaimed", undefined, true, true);
 
 export const useBuy = () => {
   const [{ error, loading }, write] = useContractWrite(
     ScuffedFemboysConfig,
-    'buy'
-  )
-  const send = useCallback((value: BigNumberish, valueCount: number) => {
-    write({ overrides: { value }, args: [valueCount] })
-  }, [write])
+    "buy"
+  );
+  const send = useCallback(
+    (value: BigNumberish, valueCount: number) => {
+      write({ overrides: { value }, args: [valueCount] });
+    },
+    [write]
+  );
   return {
     error,
     loading,
-    send
-  }
-}
+    send,
+  };
+};
 
 export const useClaim = () => {
   const [{ error, loading }, write] = useContractWrite(
     ScuffedFemboysConfig,
-    'claim'
-  )
-  const send = useCallback((merkleProof: string[]) => {
-    console.log(merkleProof);
-    write({ args: [merkleProof] })
-  }, [write])
+    "claim"
+  );
+  const send = useCallback(
+    (merkleProof: string[]) => {
+      console.log(merkleProof);
+      const res = write({ args: [merkleProof] });
+      res.then(r => console.log(r.error))
+    },
+    [write]
+  );
   return {
     error,
     loading,
-    send
-  }
-}
-
-/* export const useScuffedFemboysConfig = () => {
-  const mintStatus = useMintStatus()
-  const maxSupply = useMaxSupply()
-  const totalSupply = useTotalSupply()
-  return {
-    mintStatus,
-    maxSupply,
-    totalSupply
-  }
-} */
+    send,
+  };
+};

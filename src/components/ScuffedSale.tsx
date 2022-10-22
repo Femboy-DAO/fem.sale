@@ -17,15 +17,19 @@ export const ScuffedSale = () => {
   const scuffiesSold = useScuffiesSold();
   const maxScuffies4Claim = useMaxScuffies4Claim();
   const scuffiesClaimed = useScuffiesClaimed();
-  const alreadyClaimed = useAlreadyClaimed(userAddress);
+  const alreadyClaimed = useAlreadyClaimed();
+
+  React.useMemo(() => {
+    console.log(`MINT STATUS ${mintStatus}`)
+  }, [mintStatus])
 
   const mintPrice = 0.04;
   const [mintCount, setMintCount] = React.useState(1);
   const claimCount = 2;
 
-  function getBuyValue() {
+  const getBuyValue = React.useCallback(() => {
     return NP.times(mintCount, mintPrice);
-  }
+  }, [mintCount, mintPrice])
 
   interface addressProofBook {
     [key: string]: string[];
@@ -33,18 +37,18 @@ export const ScuffedSale = () => {
 
   let claimMerkleProofsAddress : addressProofBook = claimMerkleProofs.address;
 
-  function getMerkleProofsByAddress(addy:string) {
+  const getMerkleProofsByAddress = React.useCallback((addy:string) => {
     return claimMerkleProofsAddress[addy.toLowerCase()];
-  }
+  }, [claimMerkleProofsAddress])
 
-  function getMerkleProofsByAddressExist(addy:string) {
+  const getMerkleProofsByAddressExist = React.useCallback((addy:string) => {
     return claimMerkleProofsAddress.hasOwnProperty(addy.toLowerCase());
-  }
+  }, [claimMerkleProofsAddress])
 
   const buyCb = useBuy()
   const [disabledBuy, errorMessageBuy] = React.useMemo(() => {
     //if (buyCb.error) console.log(buyCb.error.toString())
-    if (!mintStatus || !maxScuffies4Sale || scuffiesSold == null) return [true, 'Loading...'] // undefined
+    if (mintStatus === undefined || maxScuffies4Sale === undefined || scuffiesSold === undefined) return [true, "Loading..."];
     if (!userAddress.address) return [true, 'Please connect wallet']
     if (buyCb.loading) return [true, 'Transaction pending...']
     if ((+getBuyValue()) > +(ethBalance.formatted || '0')) return [true, 'Insufficient balance.']
@@ -53,12 +57,12 @@ export const ScuffedSale = () => {
     if (scuffiesSold + mintCount > maxScuffies4Sale) return [true, "You can't buy more than there are left"]
     if (scuffiesSold + mintCount <= maxScuffies4Sale) return [false, ""]
     return [true, 'They\'re all gone ;_;']
-  }, [mintStatus, scuffiesSold, maxScuffies4Sale, ethBalance, userAddress, mintCount, buyCb.loading, buyCb.error, totalSupply, maxSupply])
+  }, [mintStatus, scuffiesSold, maxScuffies4Sale, getBuyValue, ethBalance, userAddress, mintCount, buyCb.loading])
 
   const claimCb = useClaim()
   const [disabledClaim, errorMessageClaim] = React.useMemo(() => {
     //if (claimCb.error) console.log(claimCb.error.toString())
-    if (!mintStatus || !maxScuffies4Claim || scuffiesClaimed == null) return [true, 'Loading...']
+    if (mintStatus === undefined || maxScuffies4Claim === undefined || scuffiesClaimed === undefined) return [true, "Loading..."];
     if (!userAddress.address) return [true, 'Please connect wallet']
     if (claimCb.loading) return [true, 'Transaction pending...']
 
@@ -72,7 +76,7 @@ export const ScuffedSale = () => {
     if (getMerkleProofsByAddressExist(userAddress.address)) return [false, 'You\'re on the list! :D']
 
     return [true, 'Unknown']
-  }, [mintStatus, scuffiesClaimed, maxScuffies4Claim, ethBalance, userAddress, claimCb.loading, claimCb.error, totalSupply, maxSupply])
+  }, [mintStatus, scuffiesClaimed, maxScuffies4Claim, userAddress, alreadyClaimed, getMerkleProofsByAddressExist, claimCb.loading])
 
   function mintCountInputVailidityCheck(val: string) {
     let parsedNum = mintCount;
