@@ -4,6 +4,14 @@ import { useBalance, useAccount } from 'wagmi'
 import { Fem } from '../config';
 import { useLastDefined } from './use-last-defined';
 
+export const useAddress = () => {
+  const [{ data: account },] = useAccount()
+  const address = account?.address;
+  return {
+    address: address
+  }
+}
+
 export const useEthBalance = () => {
   const [{ data: account },] = useAccount()
   const address = account?.address;
