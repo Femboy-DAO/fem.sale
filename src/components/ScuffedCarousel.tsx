@@ -10,12 +10,14 @@ export const ScuffedCarousel = () => {
 
       const slidesContainer = document.getElementById("slides-container");
       const slide = document.querySelector(".slide");
+      const slideCount = document.getElementById("slides-container")?.children.length || 9999;
 
       let slidesCount = (document.getElementById("slides-container")?.children.length || 0)*1;
       let moveDir = 1;
 
       const slideWidth = ((slide?.clientWidth) || 0)/1;
       const containerWidth = slidesContainer?.clientWidth || 0;
+      const clientWidth = document.getElementById('root')?.clientWidth || 9999;
 
       if (slidesContainer) {
         slidesContainer.scrollLeft = 0;
@@ -25,6 +27,21 @@ export const ScuffedCarousel = () => {
         
         if (loadInterval) {
           clearInterval(loadInterval);
+        }
+
+        // load more images
+        if (slidesContainer && slidesContainer.children) {
+          //slidesContainer.scrollLeft
+          let loadUpTo = Math.min(Math.round((slidesContainer.scrollLeft + clientWidth + slideWidth*2) / slideWidth), slideCount);
+
+          for(let i=0; i<loadUpTo; i++) {
+            let currentImg = slidesContainer.children[i].children[0] as HTMLImageElement ;
+
+            if(!currentImg.src) {
+              console.log("loading image ", i+1);
+              currentImg.src = "preview_fems/" + (i+1) + ".png"
+            }
+          }
         }
         
         sliderInterval = setInterval(() => {
@@ -48,12 +65,27 @@ export const ScuffedCarousel = () => {
               }
             }
             //console.log(moveDir, containerWidth, slideWidth, slidesContainer.scrollLeft + "");
+
+            // load more images
+            if (slidesContainer && slidesContainer.children) {
+              //slidesContainer.scrollLeft
+              let loadUpTo = Math.min(Math.round((slidesContainer.scrollLeft + clientWidth + slideWidth*2) / slideWidth), slideCount);
+
+              for(let i=0; i<loadUpTo; i++) {
+                let currentImg = slidesContainer.children[i].children[0] as HTMLImageElement;
+
+                if(!currentImg.src) {
+                  console.log("loading image ", i+1);
+                  currentImg.src = "preview_fems/" + (i+1) + ".png"
+                }
+              }
+            }
           }
 
         }, 5000);
       }
 
-    }, 2000);
+    }, 500);
 
     return function cleanup() {
       if (sliderInterval) {
@@ -77,18 +109,38 @@ export const ScuffedCarousel = () => {
           <li className="slide"><img src="preview_fems/6.png"></img></li>
           <li className="slide"><img src="preview_fems/7.png"></img></li>
           <li className="slide"><img src="preview_fems/8.png"></img></li>
-          <li className="slide"><img src="preview_fems/9.png"></img></li>
-          <li className="slide"><img src="preview_fems/10.png"></img></li>
-          <li className="slide"><img src="preview_fems/11.png"></img></li>
-          <li className="slide"><img src="preview_fems/12.png"></img></li>
-          <li className="slide"><img src="preview_fems/13.png"></img></li>
-          <li className="slide"><img src="preview_fems/14.png"></img></li>
-          <li className="slide"><img src="preview_fems/15.png"></img></li>
-          <li className="slide"><img src="preview_fems/16.png"></img></li>
-          <li className="slide"><img src="preview_fems/17.png"></img></li>
-          <li className="slide"><img src="preview_fems/18.png"></img></li>
-          <li className="slide"><img src="preview_fems/19.png"></img></li>
-          <li className="slide"><img src="preview_fems/20.png"></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
+          <li className="slide"><img></img></li>
         </ul>
       </section>
     </div>
