@@ -92,12 +92,41 @@ body {
 }
 }
 
+.navbar-route-button a {
+  margin:auto;
+}
+
+@media (orientation: portrait) {
+  .gen-container.navbar-route {
+    width: 100%;
+    display:block;
+  }
+  
+  .gen-container.navbar-route-button {
+    width: 100%;
+  }
+}
+
+@media (orientation: landscape) {
+  .gen-container.navbar-route {
+    width: 100%;
+  }
+  
+  .gen-container.navbar-route-button {
+
+  }
+}
+
 .gen-container.alt-color-1 {
   background-color: rgb(230, 126, 178);
 }
 
 .gen-container.alt-color-2 {
   background-color: rgb(240, 166, 203);
+}
+
+.gen-container.alt-color-3 {
+  background-color: rgb(253, 206, 230);
 }
 
 .top-banner-container {
@@ -249,7 +278,7 @@ body {
   max-width: 500px;
 } */
 
-h3, span, p {
+h3, span, p, a {
   color: #d04d65;
 }
 

@@ -1,0 +1,17 @@
+import React from 'react';
+import '../../App.css';
+import { Banner, Debug, DAOLore, Deposit, Withdraw, ScuffedCarousel, ScuffedSale, ScuffedInfo, Navbar, NavbarRoutes, SaleStatus } from '../../components'
+import { Footer } from '../../components/Footer';
+import { DEBUG } from '../../config';
+
+function App() {
+  return <>
+    {/* <SaleStatus />
+    <Deposit /> */}
+    <Navbar />
+    <DAOLore />
+    {/*  DEBUG && <Debug /> */}
+  </>
+}
+
+export default App;

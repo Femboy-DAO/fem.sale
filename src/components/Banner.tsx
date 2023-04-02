@@ -1,7 +1,5 @@
 export const Banner = () => {
   return <div>
-    <div className="logo-splash gen-container padded alt-color-2">
-    </div>
     <div className="banner-splash gen-container center-insides alt-color-1">
       <div
         className="splash-container gen-container center-insides">
