@@ -37,6 +37,10 @@ body {
   /* background-color: gray; */
 }
 
+.cursor-pointer {
+  cursor: default;
+}
+
 .center-text {
   text-align: center;
 }

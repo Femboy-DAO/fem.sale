@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export const NavbarRoutes = () => {
   return <div>
     <div className="gen-container navbar-route alt-color-2">
-      <div className="gen-container padded center-insides alt-color-2">
+      <div className="gen-container padded center-insides alt-color-2 cursor-pointer">
         <h1 style={{ color: 'white' }}>
           FEMBOY
         </h1>
