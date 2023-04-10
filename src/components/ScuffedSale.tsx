@@ -167,6 +167,9 @@ export const ScuffedSale = () => {
  */}
 
       </div>
+      
     </div>
+    
   </div>
+  
 }

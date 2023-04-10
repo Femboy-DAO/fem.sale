@@ -155,6 +155,23 @@ body {
   background-position: left bottom;
 }
 
+.banner-repeating {
+  margin: 0 0;
+  height: 14vh;
+  width:100%;
+  background-size: auto 14.2vh;
+  background-image: url("../public/banner_heads.png");
+}
+
+.footer-repeating {
+  margin: 0 0;
+  height: 14vh;
+  width:100%;
+  background-size: auto 14.2vh;
+  background-image: url("../public/banner_tails.png");
+}
+
+
 @media (orientation: landscape) {
   .splash-image {
     width: 80%;
