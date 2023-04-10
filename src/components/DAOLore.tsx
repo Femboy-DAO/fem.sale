@@ -14,7 +14,8 @@ export const DAOLore = () => {
       </p>
       <h3>Main NFT Collection</h3>
       <p>
-        Work on the main collection started in July 2022 after the council found a worthy artist to draw it: Nekobox. 
+        Work on the main collection started in July 2022, after the council found a worthy artist to draw it. 
+        We're proud to work with <a href="https://linktr.ee/nekobox">Nekobox</a>.
         This collection is still in development, so check again later. 
       </p>
       <h3>Scuffed Femboys</h3>
