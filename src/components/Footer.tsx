@@ -21,7 +21,7 @@ const LinkExt = ({ href, children }: { href: string; children: ReactNode; }) =>
 }} */
 
 export const Footer = () => {
-  return <div><div className="big-container transparent"></div><div className="flat-container footer-container">
+  return <div><div className="flat-container footer-container">
     <div className="footer">
 
       <LinkExt href={TWITTER_URL}><img className="fa" src={Twitter} alt="Twitter logo" /></LinkExt>
