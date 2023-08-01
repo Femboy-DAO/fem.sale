@@ -17,6 +17,10 @@ export const NavbarRoutes = () => {
         <div className="gen-container padded alt-color-3 center-insides navbar-route-button">
           <Link to="/scuffies"><h3>SCUFF</h3></Link>
         </div>
+
+<div className="gen-container padded alt-color-3 center-insides navbar-route-button">
+  <Link to="/links"><h3>LINKS</h3></Link>
+</div>
       </div>
 
     </div>
