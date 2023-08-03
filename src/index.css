@@ -672,3 +672,8 @@ p.error-message {
 .container-status h1 {
   font-size: 23px;
 }
+
+/* Wallet Connect WalletConnect - small fix on firefox where this div adds a few pixels to the bottom of the page */
+.-walletlink-css-reset .-walletlink-link-flow-root {
+  display:block;
+}
