@@ -18,11 +18,11 @@ export const DAOLore = () => {
         We're proud to work with <a href="https://linktr.ee/nekobox">Nekobox</a>.
         This collection is still in development, so check again later. 
       </p>
-      <h3>Scuffed Femboys</h3>
+      {/* <h3>Scuffed Femboys</h3>
       <p>
         Somewhere along the way we wanted to expand our technical capabilities when it came to actually making the main NFT collection,
         then the placeholder developer art got a bit out of hand, and a small collection of scuffed femboys was the result.
-      </p>
+      </p> */}
       {/* <h3>Other ventures</h3>
       <p>
         There's nothing else yet... unless... maybe... Do YOU have wonderful ideas that need some help?
